@@ -15,14 +15,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 class LoginActivity : AppCompatActivity() {
 
     // Properties for UI elements
-    private val submitButton: Button
-        get() = findViewById(R.id.submit_button)
-    private val registerButton: Button
-        get() = findViewById(R.id.register_button)
-    private val userName: EditText
-        get() = findViewById(R.id.user_name)
-    private val password: EditText
-        get() = findViewById(R.id.password)
+    private val submitButton: Button by lazy { findViewById(R.id.submit_button) }
+    private val registerButton: Button by lazy { findViewById(R.id.register_button) }
+    private val userName: EditText by lazy { findViewById(R.id.user_name) }
+    private val password: EditText by lazy { findViewById(R.id.password) }
 
     // Properties for registered user data
     private var registeredUsername: String? = ""
@@ -43,8 +39,16 @@ class LoginActivity : AppCompatActivity() {
 
                 userName.setText(registeredUsername)
                 password.setText(registeredPassword)
+                saveUserData(registeredUser)
             }
         }
+
+        retrieveUserData()?.let {
+            registeredUser = it
+            userName.setText(it.username)
+            password.setText(it.password)
+        }
+
         registerButton.setOnClickListener {
             startForResult.launch(Intent(this, RegisterActivity::class.java))
         }
@@ -84,5 +88,27 @@ class LoginActivity : AppCompatActivity() {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         }
+    }
+
+    // SharedPreferences functions
+    private fun saveUserData(user: User) {
+        val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("username", user.username)
+        editor.putString("password", user.password)
+        // add other fields as needed
+        editor.apply()
+    }
+
+    private fun retrieveUserData(): User? {
+        val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val username = sharedPreferences.getString("username", null)
+        val password = sharedPreferences.getString("password", null)
+
+        if (username != null && password != null) {
+            return User(username, password)
+            // populate other fields as needed
+        }
+        return null
     }
 }
