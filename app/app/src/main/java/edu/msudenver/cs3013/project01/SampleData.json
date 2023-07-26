@@ -1,0 +1,79 @@
+{
+  "chain": "eth-main",
+  "total": 200,
+  "cursor": "KGpzb24pIjB4NDFmNTZiMDAwZmZmZTE3OTQzZmI0YzE4MmMxMjM3NjdhZjcxZDAwNSI",
+  "per_page": 25,
+  "results": [
+    {
+      "token_type": "erc721",
+      "contract_address": "0x2f329de74f67e2c1c5d2a6487ae50c99873d8589",
+      "id": 5336,
+      "token_name": "Dead Degen #5336",
+      "token_description": "Dead Degen Skull Society is a collection of 6666 degenerates",
+      "uri": "ipfs://QmPF8ENi9oJAMDVe9TnseemayfH6ivNeycLDzJrbk5anXD/5336",
+      "metadata": {
+        "name": "Dead Degen #5336",
+        "image": "ipfs://<key>",
+        "attributes": []
+      },
+      "metadata_updated_at": "2023-01-25T19:22:03.000Z",
+      "rarity_rank": 17,
+      "rarity_score": 1.1561093,
+      "total_transfers": 27,
+      "minted_at": "2022-04-25T19:22:03.000Z",
+      "total_current_owners": 1,
+      "current_owners": [
+        {
+          "address": "0x41f56b000fffe17943fb4c182c123767af71d005",
+          "quantity": "1"
+        }
+      ],
+      "recent_price": {
+        "contract_address": "0x1b780fc912e96e7d9557080530786b927fe8706f",
+        "id": "1",
+        "hash": "0x6fe40e0a78cafa2b93be8ea47b36cb97c23efb5019b34acdd22857421382675e",
+        "hash_nft_count": "1",
+        "from_address": "0x4b461c5496dd7cc23343a0d69a83d40418d15a6e",
+        "to_address": "0x56d451c0a75b545fa69c0cf2d5d086bbdf56ab28",
+        "date": "2022-09-13T17:07:57.000Z",
+        "quantity": "2",
+        "price": "0.02",
+        "price_currency": "ETH",
+        "price_usd": "34.04356220757607",
+        "price_native": "0.02",
+        "currency": [
+          {
+            "symbol": "ETH",
+            "name": "ETH (NATIVE)",
+            "decimals": 18,
+            "contract_address": null,
+            "from_address": null,
+            "to_address": null,
+            "price": "20000000000000000"
+          }
+        ],
+        "er20_transfers": [
+          {
+            "symbol": "ETH",
+            "name": "Wrapped ETH",
+            "decimals": 18,
+            "contract_address": null,
+            "from_address": null,
+            "to_address": null,
+            "price": "1000000000000000"
+          }
+        ]
+      },
+      "cached_videos": {
+        "original": "https://cdn.blockspan.com/....bb6df098cd8bc6127.mp4"
+      },
+      "cached_images": {
+        "tiny_100_100": "https://cdn.blockspan.com/....bb6df098cd8bc6127_100_100.jpg",
+        "small_250_250": "https://cdn.blockspan.com/....bb6df098cd8bc6127_250_250.jpg",
+        "medium_500_500": "https://cdn.blockspan.com/....bb6df098cd8bc6127_500_500.jpg",
+        "large_1000_1000": "https://cdn.blockspan.com/....bb6df098cd8bc6127_1000_1000.jpg",
+        "original": "https://cdn.blockspan.com/....bb6df098cd8bc6127.jpg"
+      }
+    }
+  ]
+}

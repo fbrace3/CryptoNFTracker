@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/nftImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="TODO" />
+
+    <TextView
+        android:id="@+id/textPriceNft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:gravity="center_horizontal"
+        android:layout_toEndOf="@id/nftImage" />
+
+    <Button
+        android:id="@+id/btnBuyNft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buy"
+        android:layout_toRightOf="@+id/textPriceNft"
+        android:layout_toStartOf="@+id/btnAddNft"
+        android:layout_marginTop="85dp"
+        android:layout_centerVertical="true" />
+
+    <Button
+        android:id="@+id/btnAddNft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:layout_marginTop="85dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
+
+</RelativeLayout>

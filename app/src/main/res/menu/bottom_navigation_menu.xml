@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_navigation_menu"
+    app:itemTextColor="@color/white">
+    <item
+        android:id="@+id/nav_coin_fragment"
+        android:title="Coin"
+        android:icon="@drawable/baseline_currency_bitcoin_24"
+        />
+    <item
+        android:id="@+id/nav_menu"
+        android:title="@string/favorite"
+        android:icon="@drawable/home" />
+    <item
+        android:id="@+id/nav_nft_fragment"
+        android:title="NFT"
+        android:icon="@drawable/baseline_cruelty_free_24"
+         />
+    <item
+        android:id="@+id/nav_BankFinderFragment"
+        android:title="Bank Finder"
+        android:icon="@drawable/baseline_account_balance_24"
+        />
+<!--    <item-->
+<!--        android:id="@+id/nav_menu"-->
+<!--        android:title="Menu"-->
+<!--        android:icon="@drawable/home" />-->
+
+
+</menu>

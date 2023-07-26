@@ -1,0 +1,45 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_menu"
+            android:icon="@drawable/home"
+            android:title="@string/favorite" />
+        <item
+            android:id="@+id/nav_coin_fragment"
+            android:icon="@drawable/money"
+            android:title="@string/coin" />
+        <item
+            android:id="@+id/nav_nft_fragment"
+            android:icon="@drawable/money"
+            android:title="@string/nft" />
+        <item
+            android:id="@+id/nav_BankFinderFragment"
+            android:icon="@drawable/money"
+            android:title="@string/bank_finder" />
+
+    </group>
+
+<!--    <group-->
+<!--        android:id="@+id/menu_bottom"-->
+<!--        android:checkableBehavior="single">-->
+
+<!--        <item-->
+<!--            android:id="@+id/tab_activity"-->
+<!--            android:icon="@drawable/tabs"-->
+<!--            android:title="@string/tabs" />-->
+<!--        <item-->
+<!--            android:id="@+id/nav_resources"-->
+<!--            android:icon="@drawable/resources"-->
+<!--            android:title="@string/resources" />-->
+<!--        <item-->
+<!--            android:id="@+id/nav_shopping"-->
+<!--            android:icon="@drawable/shopping"-->
+<!--            android:title="@string/shopping" />-->
+<!--    </group>-->
+
+</menu>

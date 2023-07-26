@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_menu"
+    app:menu="@menu/drawer_menu"
+    app:defaultNavHost="true">
+
+    <!-- Fragments -->
+    <fragment
+        android:id="@+id/nav_menu"
+        android:name="edu.msudenver.cs3013.project01.FavoriteFragment"
+        android:label="@string/favorite"
+        tools:layout="@layout/fragment_favorite">
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_coin_fragment"
+        android:name="edu.msudenver.cs3013.project01.CoinFragment"
+        android:label="@string/coin"
+        tools:layout="@layout/fragment_coin" />
+
+    <fragment
+        android:id="@+id/nav_nft_fragment"
+        android:name="edu.msudenver.cs3013.project01.NftFragment"
+        android:label="@string/nft"
+        tools:layout="@layout/fragment_nft" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_BankFinderFragment"
+        android:name="edu.msudenver.cs3013.project01.BankFinderFragment"
+        android:label="@string/bank_finder"
+        tools:layout="@layout/fragment_bank_finder" />
+
+
+</navigation>
+
