@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 class FavoriteFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerViewNft: RecyclerView
 
     // Use the shared ViewModel
     private val favoritesViewModel: FavoritesViewModel by activityViewModels()
@@ -29,10 +30,17 @@ class FavoriteFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerViewFavorites)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        recyclerViewNft = view.findViewById(R.id.recyclerViewNftFavorites)
+        recyclerViewNft.layoutManager = LinearLayoutManager(requireContext())
+
         // Initialize the CryptocurrencyAdapter
         // Note: We're passing `false` for `showAddButton` argument to hide the "Add" button.
         // We also provide an empty lambda {} since there's no action required on button click.
         val adapter = CryptocurrencyAdapter(favoritesViewModel.favoritesList.toMutableList(), {}, false)
         recyclerView.adapter = adapter
+
+
+        val adapterNft = NftAdapter(favoritesViewModel.nftfavoritesList.toMutableList(), {}, false)
+        recyclerViewNft.adapter = adapterNft
     }
 }

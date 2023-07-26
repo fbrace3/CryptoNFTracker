@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.moshi.Moshi
@@ -41,6 +41,7 @@ class NftFragment : Fragment() {
         retrofit.create(NftApiService::class.java)
     }
     private lateinit var recyclerView: RecyclerView
+    private val favoritesViewModel: FavoritesViewModel by activityViewModels()
 
 
 //    private val serverResponseView: TextView by lazy {
@@ -84,6 +85,7 @@ class NftFragment : Fragment() {
             override fun onFailure(call: Call<NftData>, t: Throwable) {
                 Log.e("Nft Fragment", "Failed to get search results", t)
             }
+
             override fun onResponse(
                 call: Call<NftData>,
                 response: Response<NftData>
@@ -93,7 +95,13 @@ class NftFragment : Fragment() {
                     // Set up the RecyclerView adapter
                     if (listings != null) {
                         Log.d("Nft Fragment", "Got search results: $listings")
-                        val adapter = NftAdapter(listings)
+                        val adapter = NftAdapter(
+                            nftData = listings,
+                            onAddButtonClickListener = { nftItem ->
+                                // Add the NFT to favorites.
+                                favoritesViewModel.addToNftFavorites(nftItem)
+                            }
+                        )
                         recyclerView.adapter = adapter
                     }
                 } else {
@@ -102,38 +110,10 @@ class NftFragment : Fragment() {
                         "Failed to get cryptocurrency listings\n${response.errorBody()?.string().orEmpty()}"
                     )
                 }
-//                if (response.isSuccessful) {
-//                    val nftData = response.body()
-//                    val imageResults = response.body()?.results?.mapNotNull { it.cached_images }
-//                    val firstImageUrl = imageResults?.firstOrNull()?.small_250_250.orEmpty()
-//                    Log.d("NFT DATA", nftData.toString())
-//                    if (!firstImageUrl.isBlank()) {
-//                        imageLoader.loadImage(firstImageUrl, profileImageView)
-//                    } else {
-//                        Log.d("MainActivity", "Missing image URL")
-//                    }
-//
-//                    if (nftData != null) {
-//                        // Process the response data
-//                        val listings = nftData.results
-////                        val responseData = listings?.joinToString("\n") { nftItem ->
-////                            "Name: ${nftItem.name}, Price: ${nftItem.price_usd}"
-////                        }
-//
-////                        serverResponseView.text = responseData
-//
-//                    } else {
-//                        Log.e(
-//                            "MainActivity",
-//                            "Failed to get search results\n${
-//                                response.errorBody()?.string().orEmpty()
-//                            }"
-//                        )
-//                    }
-//                }
             }
         })
     }
+
 
     private fun createOkHttpClient(): OkHttpClient {
         val apiKey = "EFy3JzHQ0WQDpScrplwG9fZHGquhD5DV"

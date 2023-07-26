@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Favorites"
+        android:text="User Favorites Crypto"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -18,6 +18,21 @@
     <!-- RecyclerView to display user favorites -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFavorites"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Favorites NFTs"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewNftFavorites"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
