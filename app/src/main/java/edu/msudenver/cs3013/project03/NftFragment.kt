@@ -42,7 +42,7 @@ class NftFragment : Fragment() {
     }
     private lateinit var recyclerView: RecyclerView
     private val favoritesViewModel: FavoritesViewModel by activityViewModels()
-
+    private lateinit var adapter: NftAdapter
 
 //    private val serverResponseView: TextView by lazy {
 //        view?.findViewById<TextView>(R.id.nft_server_response)!!
@@ -91,16 +91,18 @@ class NftFragment : Fragment() {
                 response: Response<NftData>
             ) {
                 if (response.isSuccessful) {
-                    val listings = response.body()?.results
+                    val listings = response.body()?.results?.toMutableList()
                     // Set up the RecyclerView adapter
                     if (listings != null) {
                         Log.d("Nft Fragment", "Got search results: $listings")
-                        val adapter = NftAdapter(
+                        adapter = NftAdapter(
                             nftData = listings,
                             onAddButtonClickListener = { nftItem ->
                                 // Add the NFT to favorites.
                                 favoritesViewModel.addToNftFavorites(nftItem)
+                                adapter.removeItem(nftItem)
                             }
+
                         )
                         recyclerView.adapter = adapter
                     }

@@ -11,7 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 
 class NftAdapter(
-    private val nftData: List<NftItem>,
+    private var nftData: MutableList<NftItem>,
     private val onAddButtonClickListener: (NftItem) -> Unit,
     private val showAddButton: Boolean = true
 ) : RecyclerView.Adapter<NftAdapter.NftViewHolder>() {
@@ -73,5 +73,12 @@ class NftAdapter(
 
     override fun getItemCount(): Int {
         return nftData.size
+    }
+    fun removeItem(nftItem: NftItem) {
+        val position = nftData.indexOf(nftItem)
+        if (position != -1) {
+            nftData.removeAt(position)
+            notifyItemRemoved(position)
+        }
     }
 }
