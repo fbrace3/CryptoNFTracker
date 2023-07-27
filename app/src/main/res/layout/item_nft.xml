@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp">
@@ -9,7 +10,10 @@
         android:id="@+id/nftImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:contentDescription="TODO" />
+        android:contentDescription="TODO"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/textPriceNft"
@@ -17,26 +21,26 @@
         android:layout_height="wrap_content"
         android:textSize="32sp"
         android:gravity="center_horizontal"
-        android:layout_toEndOf="@id/nftImage" />
-
-    <Button
-        android:id="@+id/btnBuyNft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Buy"
-        android:layout_toRightOf="@+id/textPriceNft"
-        android:layout_toStartOf="@+id/btnAddNft"
-        android:layout_marginTop="85dp"
-        android:layout_centerVertical="true" />
+        app:layout_constraintStart_toEndOf="@+id/nftImage"
+        app:layout_constraintTop_toTopOf="@+id/nftImage"
+        app:layout_constraintBottom_toBottomOf="@+id/nftImage"/>
 
     <Button
         android:id="@+id/btnAddNft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add"
-        android:layout_marginTop="85dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/nftImage"/>
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/btnBuyNft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buy"
+        app:layout_constraintStart_toEndOf="@+id/textPriceNft"
+        app:layout_constraintEnd_toStartOf="@+id/btnAddNft"
+        app:layout_constraintTop_toTopOf="@+id/btnAddNft"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAddNft"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

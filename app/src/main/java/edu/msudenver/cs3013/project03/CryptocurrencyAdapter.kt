@@ -53,4 +53,9 @@ class CryptocurrencyAdapter(
             notifyItemRemoved(position)
         }
     }
+    fun getItemAtPosition(position: Int): Cryptocurrency {
+        return cryptocurrencies[position]
+    }
+
+
 }

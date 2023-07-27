@@ -81,4 +81,8 @@ class NftAdapter(
             notifyItemRemoved(position)
         }
     }
+    fun getItemAtPosition(position: Int): NftItem {
+        return nftData[position]
+    }
+
 }
