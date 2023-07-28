@@ -1,4 +1,5 @@
 package edu.msudenver.cs3013.project03
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -28,14 +29,26 @@ class CoinFragment : Fragment() {
 
     private lateinit var adapter: CryptocurrencyAdapter
 
-
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://pro-api.coinmarketcap.com")
+            .baseUrl(baseUrl) // Note that we use the baseUrl property here
             .addConverterFactory(MoshiConverterFactory.create(getMoshi()))
             .client(createOkHttpClient())
             .build()
     }
+
+    companion object {
+        private const val ARG_BASE_URL = "baseUrl"
+
+        fun newInstance(baseUrl: String) = CoinFragment().apply {
+            arguments = Bundle().apply {
+                putString(ARG_BASE_URL, baseUrl)
+            }
+        }
+    }
+
+    private val baseUrl: String
+        get() = arguments?.getString(ARG_BASE_URL) ?: "https://pro-api.coinmarketcap.com"
 
     private val coinApiService by lazy {
         retrofit.create(CoinApiService::class.java)
@@ -100,7 +113,6 @@ class CoinFragment : Fragment() {
             }
         })
     }
-
 
     private fun getMoshi(): Moshi {
         return Moshi.Builder()

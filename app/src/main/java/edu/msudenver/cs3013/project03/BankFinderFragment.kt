@@ -188,6 +188,10 @@ class BankFinderFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+        // Set default location to Denver, Colorado
+        val denverLatLng = LatLng(39.7392, -104.9903)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(denverLatLng, 10f))
+
         // Request location permission if not granted
         if (!hasLocationPermission()) {
             requestLocationPermission()

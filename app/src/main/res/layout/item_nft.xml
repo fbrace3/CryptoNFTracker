@@ -27,16 +27,16 @@
 
     <Button
         android:id="@+id/btnAddNft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
         android:text="Add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/nftImage"/>
 
     <Button
         android:id="@+id/btnBuyNft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
         android:text="Buy"
         app:layout_constraintStart_toEndOf="@+id/textPriceNft"
         app:layout_constraintEnd_toStartOf="@+id/btnAddNft"
