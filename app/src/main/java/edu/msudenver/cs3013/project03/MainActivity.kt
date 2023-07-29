@@ -38,10 +38,11 @@ class MainActivity : AppCompatActivity() {
 //        setSupportActionBar(findViewById(R.id.toolbar))
         drawerLayout = findViewById(R.id.drawer_layout)
 
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
-
+        val settingsFragment = navController.graph.findNode(R.id.nav_settings)
         // Navigate to the appropriate destination based on the source fragment
         navController.navigate(R.id.nav_menu)
 
