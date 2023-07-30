@@ -8,20 +8,20 @@
     <string name="previous">Previous</string>
     <string name="favorite">Favorites</string>
 
-<!--    login activity strings-->
+    <!--    login activity strings-->
     <string name="login_form_entry_error">Please enter a value for both fields</string>
     <string name="header_text">Please enter your username and password below to login:</string>
     <string name="username_label">Enter your username:</string>
     <string name="password_label">Enter your password:</string>
     <string name="submit_button_text">Submit</string>
 
-<!--    welcome activity strings-->
+    <!--    welcome activity strings-->
     <string name="welcome_message">Welcome to our Crypto/Nft Tracking App %s!</string>
     <string name="back_button_text">Back</string>
     <string name="continue_button_text">Continue</string>
     <string name="login_error">Please enter a username and password</string>
 
-<!--    register activity strings-->
+    <!--    register activity strings-->
     <string name="register_form_entry_error">Please enter a value for all fields</string>
     <string name="register_header_text">Please enter your information below to register:</string>
     <string name="first_name_label">Enter your first name:</string>
@@ -32,7 +32,7 @@
     <string name="register_button_text">Register</string>
     <string name="register_success">Registration successful!</string>
 
-<!--    mobile_navigation.xml strings-->
+    <!--    mobile_navigation.xml strings-->
     <string name="menu">Menu</string>
     <string name="coin">Coin</string>
     <string name="nft">NFT</string>
@@ -85,4 +85,6 @@
 
     <string name="crypto_Favorites">--%s Crypto Favorites--</string>
     <string name="nft_Favorites">--%s NFT Favorites--</string>
+
+    <string name="photo_verify">Photo Verify</string>
 </resources>

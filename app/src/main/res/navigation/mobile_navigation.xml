@@ -29,9 +29,7 @@
         android:name="edu.msudenver.cs3013.project03.NftFragment"
         android:label="@string/nft"
         tools:layout="@layout/fragment_nft" >
-        <argument
-            android:name="username"
-            app:argType="string" />
+
     </fragment>
 
     <fragment
@@ -44,10 +42,15 @@
         android:name="edu.msudenver.cs3013.project03.SettingsFragment"
         android:label="@string/settings"
         tools:layout="@layout/fragment_settings" >
-        <argument
-            android:name="myUser"
-            app:argType="edu.msudenver.cs3013.project03.User" />
+
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_photo_verify"
+        android:name="edu.msudenver.cs3013.project03.PhotoVerifyFragment"
+        android:label="@string/photo_verify"
+        tools:layout="@layout/fragment_photo_verify" />
+
 
 
 </navigation>
