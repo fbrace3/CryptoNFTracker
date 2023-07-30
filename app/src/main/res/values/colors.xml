@@ -3,11 +3,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="material_dynamic_primary">#FF6200EE</color>
-    <color name="material_dynamic_primary_dark">#FF3700B3</color>
-    <color name="colorPrimary">#FF6200EE</color>
-    <color name="colorPrimaryDark">#FF3700B3</color>
+    <color name="material_dynamic_primary">#FFA500</color>
+    <color name="material_dynamic_primary_dark">#FFA500</color>
+    <color name="colorPrimary">#FFA500</color>
+    <color name="colorPrimaryDark">#FFA500</color>
     <color name="colorAccent">#FF03DAC5</color>
     <color name="textSecondary">#FF757575</color>
     <color name="darkBackground">#FF121212</color>
+
+    <color name="gradient">#0000FF</color>
 </resources>

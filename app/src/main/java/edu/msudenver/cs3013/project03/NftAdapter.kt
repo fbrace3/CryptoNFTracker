@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 class NftAdapter(
     private var nftData: MutableList<NftItem>,
     private val onAddButtonClickListener: (NftItem) -> Unit,
-    private val showAddButton: Boolean = true
+    private val showAddButton: Boolean = true,
+//    private val onNftImageClickListener: (String) -> Unit // Add this callback for NFT image clicks
+
 ) : RecyclerView.Adapter<NftAdapter.NftViewHolder>() {
 
     class NftViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

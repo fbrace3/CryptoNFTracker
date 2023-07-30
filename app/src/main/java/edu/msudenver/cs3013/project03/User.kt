@@ -1,5 +1,6 @@
 package edu.msudenver.cs3013.project03
 
+import android.graphics.Bitmap
 import java.io.Serializable
 
 data class User(
@@ -7,5 +8,8 @@ data class User(
     var password: String = "admin",
     var firstName: String? = null,
     var lastName: String? = null,
-    var emailAddress: String? = null
+    var emailAddress: String? = null,
+    var profileImage: Bitmap? = null,
+    var verified:Boolean = false
+
 ) : Serializable

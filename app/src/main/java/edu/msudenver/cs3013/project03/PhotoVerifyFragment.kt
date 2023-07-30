@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import java.io.ByteArrayOutputStream
+
 
 class PhotoVerifyFragment : Fragment() {
 
@@ -57,11 +60,20 @@ class PhotoVerifyFragment : Fragment() {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             // Permission is already granted, proceed to take a picture
-            Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { intent ->
-                intent.resolveActivity(requireActivity().packageManager)?.let {
-                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
-                }
+            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+            // Try to find the front-facing camera
+            val packageManager = requireActivity().packageManager
+            val resolveInfo = packageManager.resolveActivity(cameraIntent, PackageManager.MATCH_DEFAULT_ONLY)
+            val packageName = resolveInfo?.activityInfo?.packageName
+
+            // Check if the front-facing camera is available
+            if (packageName != null && packageName.contains("com.android.camera")) {
+                // Set the extra parameter to indicate that we want to use the front-facing camera
+                cameraIntent.putExtra("android.intent.extras.CAMERA_FACING", 1)
             }
+
+            startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE)
         } else {
             // Permission is not granted, request it
             ActivityCompat.requestPermissions(
@@ -72,17 +84,28 @@ class PhotoVerifyFragment : Fragment() {
         }
     }
 
+
+
     private fun sendPhotoToSettings() {
+        //update the image in the user object
+
+
         capturedBitmap?.let { bitmap ->
             val settingsFragment = SettingsFragment()
             val bundle = Bundle()
             bundle.putParcelable("capturedBitmap", bitmap)
             settingsFragment.arguments = bundle
 
+            var user = arguments?.getSerializable("myUser") as User?
+            user?.verified = true
+
             // Assuming you are using a NavController to navigate between fragments
             // Replace R.id.nav_settings with the ID of the SettingsFragment destination
             findNavController().navigate(R.id.nav_settings, bundle)
+
         }
+        //update the image in the user object
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -110,5 +133,14 @@ class PhotoVerifyFragment : Fragment() {
                 // You can also handle this case by disabling the capture button or requesting the permission again
             }
         }
+    }
+
+
+    // Add this function to the PhotoVerifyFragment or a separate Utils class
+    fun bitmapToBase64(bitmap: Bitmap): String {
+        val outputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+        val byteArray = outputStream.toByteArray()
+        return Base64.encodeToString(byteArray, Base64.DEFAULT)
     }
 }

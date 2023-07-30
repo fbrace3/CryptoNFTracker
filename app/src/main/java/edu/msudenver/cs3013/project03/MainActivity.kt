@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_menu, R.id.nav_coin_fragment, R.id.nav_nft_fragment, R.id.nav_BankFinderFragment),
+                R.id.nav_menu, R.id.nav_coin_fragment, R.id.nav_nft_fragment, R.id.nav_BankFinderFragment, R.id.nav_settings),
             drawerLayout
         )
 

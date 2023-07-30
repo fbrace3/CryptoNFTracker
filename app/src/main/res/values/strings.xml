@@ -81,10 +81,10 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="settings_fragment">Settings for user %s</string>
+    <string name="settings_fragment">Settings for %s</string>
 
-    <string name="crypto_Favorites">--%s Crypto Favorites--</string>
-    <string name="nft_Favorites">--%s NFT Favorites--</string>
+    <string name="crypto_Favorites">        %s Crypto Favorites        </string>
+    <string name="nft_Favorites">        %s NFT Favorites        </string>
 
     <string name="photo_verify">Photo Verify</string>
 </resources>

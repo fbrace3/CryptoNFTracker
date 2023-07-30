@@ -77,9 +77,23 @@ class SettingsFragment : Fragment() {
             findNavController().navigate(R.id.nav_photo_verify)
 
         }
+        //if the user has already verified their identity, hide the verify button
+        if (user?.verified == true) {
+            verifyButton.visibility = View.GONE
+            //place a green checkmark where the verify button was
+            val checkmark = view.findViewById<ImageView>(R.id.verified)
+            val isVerified = view.findViewById<TextView>(R.id.verified_text)
+            checkmark.visibility = View.VISIBLE
+            isVerified.visibility = View.VISIBLE
+        }
+
+
     }
     fun setCapturedImage(bitmap: Bitmap) {
         photoVerify.setImageBitmap(bitmap)
+        //update the image in the user object
+        val user = arguments?.getSerializable("myUser") as User?
+        user?.profileImage = bitmap
         // Handle the logic to set the captured image in the SettingsFragment
         // For example, you can set the bitmap to an ImageView in the SettingsFragment
         // imageView.setImageBitmap(bitmap)

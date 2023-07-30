@@ -24,16 +24,16 @@
     <ImageView
         android:id="@+id/setting_image"
         android:layout_width="100dp"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:layout_marginTop="16dp"
         android:layout_gravity="center"
         android:src="@drawable/ic_image_placeholder"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/setting_text"
-    app:layout_constraintBottom_toTopOf="@id/preference_list"
-    app:layout_constraintHorizontal_bias="0.5" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setting_text"
+        app:layout_constraintBottom_toTopOf="@id/preference_list"
+        app:layout_constraintHorizontal_bias="0.5" />
 
 
     <LinearLayout
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="• Preference 1"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="@android:color/white" />
 
         <TextView
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="• Preference 2"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="@android:color/white" />
 
         <TextView
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="• Preference 3"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="@android:color/white" />
 
         <TextView
@@ -80,10 +80,42 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="• Preference 4"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="@android:color/white" />
 
 
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/verification_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/preference_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp">
+
+
+        <TextView
+            android:id="@+id/verified_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verified:"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/verified"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verified ID"
+            android:src="@drawable/baseline_check_box_24"
+            android:layout_marginStart="8dp"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
