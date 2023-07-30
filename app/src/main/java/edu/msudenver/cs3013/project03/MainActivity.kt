@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
@@ -65,8 +64,8 @@ class MainActivity : AppCompatActivity() {
         navController.graph = graph
 
         //display a toast message with the passedUser.username.toString() displayed
-        Toast.makeText(this, "Username: ${passedUser?.username}", Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, "User: ${passedUser}", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, "Username: ${passedUser?.username}", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, "User: ${passedUser}", Toast.LENGTH_SHORT).show()
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
