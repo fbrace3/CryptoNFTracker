@@ -13,9 +13,9 @@
         android:name="edu.msudenver.cs3013.project03.FavoriteFragment"
         android:label="@string/favorite"
         tools:layout="@layout/fragment_favorite">
-        <argument
-            android:name="username"
-            app:argType="string" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="http://msudenver.edu/favoriteFragment" />
     </fragment>
 
     <fragment
@@ -45,8 +45,8 @@
         android:label="@string/settings"
         tools:layout="@layout/fragment_settings" >
         <argument
-            android:name="username"
-            app:argType="string" />
+            android:name="myUser"
+            app:argType="edu.msudenver.cs3013.project03.User" />
     </fragment>
 
 

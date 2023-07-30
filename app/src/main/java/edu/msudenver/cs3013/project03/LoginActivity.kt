@@ -1,7 +1,6 @@
 package edu.msudenver.cs3013.project03
 
 import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -96,6 +96,9 @@ class LoginActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putString("username", user.username)
         editor.putString("password", user.password)
+        editor.putString("firstName", user.firstName)
+        editor.putString("lastName", user.lastName)
+        editor.putString("email", user.emailAddress)
         // add other fields as needed
         editor.apply()
     }
@@ -104,9 +107,13 @@ class LoginActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
         val username = sharedPreferences.getString("username", null)
         val password = sharedPreferences.getString("password", null)
+        val firstName = sharedPreferences.getString("firstName", null)
+        val lastName = sharedPreferences.getString("lastName", null)
+        val email = sharedPreferences.getString("email", null)
+
 
         if (username != null && password != null) {
-            return User(username, password)
+            return User(username, password, firstName, lastName, email)
             // populate other fields as needed
         }
         return null

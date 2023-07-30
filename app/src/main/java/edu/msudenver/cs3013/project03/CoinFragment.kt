@@ -38,7 +38,7 @@ class CoinFragment : Fragment() {
     }
 
     companion object {
-        private const val ARG_BASE_URL = "baseUrl"
+        const val ARG_BASE_URL = "baseUrl"
 
         fun newInstance(baseUrl: String) = CoinFragment().apply {
             arguments = Bundle().apply {
@@ -47,7 +47,7 @@ class CoinFragment : Fragment() {
         }
     }
 
-    private val baseUrl: String
+    val baseUrl: String
         get() = arguments?.getString(ARG_BASE_URL) ?: "https://pro-api.coinmarketcap.com"
 
     private val coinApiService by lazy {
@@ -70,7 +70,7 @@ class CoinFragment : Fragment() {
         getCoinImageResponse()
     }
 
-    private fun createOkHttpClient(): OkHttpClient {
+    fun createOkHttpClient(): OkHttpClient {
         val interceptor = Interceptor { chain ->
             val originalRequest = chain.request()
             val requestBuilder = originalRequest.newBuilder()

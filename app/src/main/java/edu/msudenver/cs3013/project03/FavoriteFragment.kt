@@ -1,10 +1,11 @@
 package edu.msudenver.cs3013.project03
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,9 @@ class FavoriteFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerViewNft: RecyclerView
+
+    private lateinit var headerFavorite: TextView
+    private lateinit var headerNftFavorite: TextView
 
     // Use the shared ViewModel
     private val favoritesViewModel: FavoritesViewModel by activityViewModels()
@@ -27,6 +31,25 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val user = arguments?.getSerializable("myUser") as User?
+        if (user != null) {
+            // Use the user data as needed
+            // For example:
+            val username = user.username
+            val firstname = user.firstName
+            val lastname = user.lastName
+            val email = user.emailAddress
+            // Update UI elements with user data, e.g., textView.text = "Username: $username"
+        }
+        val CryptoHeader = getString(R.string.crypto_Favorites, user?.username)
+        val NFTHeader = getString(R.string.nft_Favorites, user?.username)
+        headerFavorite = view.findViewById(R.id.headerFavorite)
+        headerNftFavorite = view.findViewById(R.id.headerFavoriteNft)
+
+
+        headerFavorite.text = CryptoHeader
+        headerNftFavorite.text = NFTHeader
 
         recyclerView = view.findViewById(R.id.recyclerViewFavorites)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
