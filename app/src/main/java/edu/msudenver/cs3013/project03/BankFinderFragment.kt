@@ -17,7 +17,6 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -42,6 +41,7 @@ class BankFinderFragment : Fragment(), OnMapReadyCallback {
     private var userMarker: Marker? = null
     private var carMarker: Marker? = null
 //    val viewModel: SharedViewModel by activityViewModels()
+    val denverLatLng = LatLng(39.7392, -104.9903)
 
 
     override fun onCreateView(
@@ -92,6 +92,7 @@ class BankFinderFragment : Fragment(), OnMapReadyCallback {
         markLocationButton.setOnClickListener {
             if (hasLocationPermission()) {
                 findNearbyBanks()
+
             } else {
                 requestLocationPermission()
             }
@@ -188,9 +189,10 @@ class BankFinderFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Set default location to Denver, Colorado
-        val denverLatLng = LatLng(39.7392, -104.9903)
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(denverLatLng, 10f))
+//        // Set default location to Denver, Colorado
+
+        userMarker = addMarkerAtLocation(denverLatLng, "You")
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(denverLatLng, 15f))
 
         // Request location permission if not granted
         if (!hasLocationPermission()) {
@@ -232,6 +234,7 @@ class BankFinderFragment : Fragment(), OnMapReadyCallback {
 
             makeNetworkRequestTo(url) { banks ->
                 banks.forEach { bank ->
+
                     val markerIcon = getBitmapDescriptorFromVector(R.drawable.baseline_account_balance_24)
                     addMarkerAtLocation(LatLng(bank.latitude, bank.longitude), bank.name, markerIcon)
                 }
@@ -254,10 +257,12 @@ class BankFinderFragment : Fragment(), OnMapReadyCallback {
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
                 response.use { resp ->
                     if (resp.isSuccessful) {
+
                         val responseBody = resp.body?.string()
                         val banks = mutableListOf<Bank>()
 
                         if (responseBody != null) {
+
                             val jsonResponse = JSONObject(responseBody)
                             val banksArray = jsonResponse.getJSONArray("results")
 

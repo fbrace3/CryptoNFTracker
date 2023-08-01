@@ -3,10 +3,23 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="material_dynamic_primary">#FFA500</color>
-    <color name="material_dynamic_primary_dark">#FFA500</color>
-    <color name="colorPrimary">#FFA500</color>
-    <color name="colorPrimaryDark">#FFA500</color>
+    <color name="material_dynamic_primary95">#ADD8E6</color>
+    <color name="light_blue">#ADD8E6</color>
+    <color name="medium_blue">#0000FF</color>
+    <color name="dark_blue">#00008B</color>
+    <color name="sky_blue">#87CEEB</color>
+    <color name="steel_blue">#4682B4</color>
+    <color name="cornflower_blue">#6495ED</color>
+    <color name="royal_blue">#4169E1</color>
+    <color name="navy_blue">#000080</color>
+    <color name="teal">#008080</color>
+    <color name="turquoise">#40E0D0</color>
+    <color name="cerulean">#007BA7</color>
+
+    <color name="material_dynamic_primary">#0000FF</color>
+    <color name="material_dynamic_primary_dark">#00008B</color>
+    <color name="colorPrimary">#007BA7</color>
+    <color name="colorPrimaryDark">#000080</color>
     <color name="colorAccent">#FF03DAC5</color>
     <color name="textSecondary">#FF757575</color>
     <color name="darkBackground">#FF121212</color>
