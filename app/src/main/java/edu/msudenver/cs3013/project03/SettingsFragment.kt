@@ -1,7 +1,12 @@
 package edu.msudenver.cs3013.project03
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +15,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import java.io.ByteArrayOutputStream
 
 class SettingsFragment : Fragment() {
 //    private var username: String? = null
@@ -21,7 +27,12 @@ class SettingsFragment : Fragment() {
     private lateinit var preference4: TextView
     private lateinit var verifyButton: Button
 
-    override fun onCreateView(
+    // TODO Data persistence attempt - all lines regarding this will have a TODO comment
+    //private lateinit var sharedPreferences: SharedPreferences
+
+
+
+    override  fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -65,10 +76,23 @@ class SettingsFragment : Fragment() {
         preference2.text = "Last Name: " + user?.lastName
         preference4.text = "Email: " + user?.emailAddress
 
-        capturedBitmap?.let {
-            setCapturedImage(it)
-        }
+        // TODO Data persistence attempt
+        val sharedPreferences: SharedPreferences? =
+            this.activity?.getSharedPreferences("imagePreference", Context.MODE_PRIVATE)
 
+        if (sharedPreferences?.getString("image", null) == null) {
+            capturedBitmap?.let {
+                setCapturedImage(it)
+                sharedPreferences?.edit()?.putString("image", capturedBitmap?.let { encodeImageToBase64(it) })?.apply()
+                sharedPreferences?.edit()?.putBoolean("verified", true)?.apply()
+            }
+
+
+        }
+        else {
+            sharedPreferences?.getString("image", null)?.let { decodeBase64ToImage(it) }?.let { setCapturedImage(it) }
+            //user?.profileImage?.let { decodeBase64ToImage(it) }?.let { setCapturedImage(it) }
+        }
         //set click listener for verify button
         verifyButton.setOnClickListener {
             //navigate to photo verify fragment
@@ -78,7 +102,7 @@ class SettingsFragment : Fragment() {
 
         }
         //if the user has already verified their identity, hide the verify button
-        if (user?.verified == true) {
+        if (sharedPreferences?.getBoolean("verified", false) == true) {
             verifyButton.visibility = View.GONE
             //place a green checkmark where the verify button was
             val checkmark = view.findViewById<ImageView>(R.id.verified)
@@ -89,15 +113,27 @@ class SettingsFragment : Fragment() {
 
 
     }
-    fun setCapturedImage(bitmap: Bitmap) {
-        photoVerify.setImageBitmap(bitmap)
+    fun setCapturedImage(bitmap: Bitmap?) {
+        Log.d("Line 108", encodeImageToBase64(bitmap!!))
         //update the image in the user object
         val user = arguments?.getSerializable("myUser") as User?
-        user?.profileImage = bitmap
+        user?.profileImage = bitmap?.let { encodeImageToBase64(it) }
+        photoVerify.setImageBitmap(bitmap)
         // Handle the logic to set the captured image in the SettingsFragment
         // For example, you can set the bitmap to an ImageView in the SettingsFragment
         // imageView.setImageBitmap(bitmap)
         // Replace "imageView" with the actual ID of the ImageView in the SettingsFragment layout
+    }
+    fun encodeImageToBase64(imageBitmap: Bitmap): String {
+        val outputStream = ByteArrayOutputStream()
+        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+        val imageBytes = outputStream.toByteArray()
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT)
+    }
+
+    fun decodeBase64ToImage(base64String: String?): Bitmap {
+        val imageBytes = Base64.decode(base64String, Base64.DEFAULT)
+        return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
     }
     companion object {
         @JvmStatic

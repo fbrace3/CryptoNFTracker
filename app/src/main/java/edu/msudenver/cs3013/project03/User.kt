@@ -9,7 +9,7 @@ data class User(
     var firstName: String? = null,
     var lastName: String? = null,
     var emailAddress: String? = null,
-    var profileImage: Bitmap? = null,
+    var profileImage: String? = null,
     var verified:Boolean = false
 
 ) : Serializable
