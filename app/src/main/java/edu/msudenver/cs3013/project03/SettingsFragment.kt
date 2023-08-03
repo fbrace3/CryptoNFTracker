@@ -100,7 +100,7 @@ class SettingsFragment : Fragment() {
 
         }
         logoutButton.setOnClickListener {
-            signOut()
+            signOut(user)
         }
         //if the user has already verified their identity, hide the verify button
         if (sharedPreferences?.getBoolean("verified", false) == true) {
@@ -114,9 +114,9 @@ class SettingsFragment : Fragment() {
 
 
     }
-    private fun signOut() {
+    private fun signOut(user: User?) {
         // Clear user session (e.g., clear tokens, preferences, cached data)
-        clearUserSession()
+        clearUserSession(user)
 
         // Navigate to the sign-in screen and clear the fragment backstack
         val intent = Intent(requireContext(), LoginActivity::class.java)
@@ -126,9 +126,15 @@ class SettingsFragment : Fragment() {
         // Alternatively, if you're using Navigation Components:
         // findNavController().navigate(R.id.action_global_signInFragment)
     }
-    private fun clearUserSession() {
-        // Clear user session (e.g., clear tokens, preferences, cached data)
-        // TODO Clear user session
+    private fun clearUserSession(user: User?) {
+        if (user != null) {
+            user.username = null.toString()
+            user.firstName = null.toString()
+            user.lastName = null.toString()
+            user.emailAddress = null.toString()
+            user.profileImage = null.toString()
+
+        }
     }
     fun setCapturedImage(bitmap: Bitmap?) {
         Log.d("Line 108", encodeImageToBase64(bitmap!!))
