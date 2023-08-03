@@ -1,6 +1,7 @@
 package edu.msudenver.cs3013.project03
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -26,11 +27,7 @@ class SettingsFragment : Fragment() {
     private lateinit var preference3: TextView
     private lateinit var preference4: TextView
     private lateinit var verifyButton: Button
-
-    // TODO Data persistence attempt - all lines regarding this will have a TODO comment
-    //private lateinit var sharedPreferences: SharedPreferences
-
-
+    private lateinit var logoutButton: Button
 
     override  fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +63,7 @@ class SettingsFragment : Fragment() {
         preference3 = view.findViewById(R.id.preference_header3)
         preference4 = view.findViewById(R.id.preference_header4)
         verifyButton = view.findViewById(R.id.verify_id)
+        logoutButton = view.findViewById(R.id.logout_button)
 
 
         // Update the TextViews with user data
@@ -101,6 +99,9 @@ class SettingsFragment : Fragment() {
             findNavController().navigate(R.id.nav_photo_verify)
 
         }
+        logoutButton.setOnClickListener {
+            signOut()
+        }
         //if the user has already verified their identity, hide the verify button
         if (sharedPreferences?.getBoolean("verified", false) == true) {
             verifyButton.visibility = View.GONE
@@ -112,6 +113,22 @@ class SettingsFragment : Fragment() {
         }
 
 
+    }
+    private fun signOut() {
+        // Clear user session (e.g., clear tokens, preferences, cached data)
+        clearUserSession()
+
+        // Navigate to the sign-in screen and clear the fragment backstack
+        val intent = Intent(requireContext(), LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+
+        // Alternatively, if you're using Navigation Components:
+        // findNavController().navigate(R.id.action_global_signInFragment)
+    }
+    private fun clearUserSession() {
+        // Clear user session (e.g., clear tokens, preferences, cached data)
+        // TODO Clear user session
     }
     fun setCapturedImage(bitmap: Bitmap?) {
         Log.d("Line 108", encodeImageToBase64(bitmap!!))
