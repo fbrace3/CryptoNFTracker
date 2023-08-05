@@ -19,6 +19,9 @@ class FavoriteFragment : Fragment() {
     private lateinit var headerFavorite: TextView
     private lateinit var headerNftFavorite: TextView
 
+    private lateinit var adapter: CryptocurrencyAdapter
+    private lateinit var adapterNft: NftAdapter
+
     // Use the shared ViewModel
     private val favoritesViewModel: FavoritesViewModel by activityViewModels()
 

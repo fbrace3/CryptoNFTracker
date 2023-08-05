@@ -3,6 +3,9 @@ package edu.msudenver.cs3013.project03
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.intent.Intents
+import androidx.test.espresso.intent.Intents.intended
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -60,7 +63,10 @@ class LoginActivityTest {
 
     @Test
     fun testClickingSubmitOpensWelcomeActivity() {
-        // Assuming valid username and password are filled in:
+        // Step 1: Initialize the Intents capturing
+        Intents.init()
+
+        // Perform the actions on the views as before
         onView(withId(R.id.user_name))
             .perform(typeText("TestUser"), closeSoftKeyboard())
 
@@ -69,8 +75,12 @@ class LoginActivityTest {
 
         onView(withId(R.id.submit_button))
             .perform(click())
-        // You can then assert that a specific view from the WelcomeActivity is displayed
-        // to confirm that the WelcomeActivity is launched.
+
+        // Step 3: Check the intent after clicking the button
+        intended(hasComponent(WelcomeActivity::class.java.name))
+
+        // Step 4: Release the Intents after the test finishes
+        Intents.release()
     }
 
     // You can add more tests for other functionalities, error scenarios, etc.

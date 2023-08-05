@@ -61,6 +61,5 @@ class WelcomeActivityTest {
             .check(matches(isDisplayed()))
     }
 
-    // You can further extend these tests to include more scenarios based on other features of the activity.
 
 }

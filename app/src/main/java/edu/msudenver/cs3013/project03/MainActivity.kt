@@ -54,9 +54,6 @@ class MainActivity : AppCompatActivity() {
 
         val graph = navController.navInflater.inflate(R.navigation.mobile_navigation)
 
-// Retrieve the user data from the intent
-        passedUser = intent.getSerializableExtra("myUser") as User?
-
 // Set default arguments for each fragment destination in the navigation graph
         graph.addDefaultArguments(passedUser)
 
@@ -132,7 +129,7 @@ class MainActivity : AppCompatActivity() {
         // Loop through each fragment destination in the graph and add default arguments
         for (destination in this) {
             if (destination is FragmentNavigator.Destination) {
-                destination.addArgument("myUser", NavArgument.Builder().setDefaultValue(user).build())
+                destination.addArgument("myUser", NavArgument.Builder().setDefaultValue(user).setIsNullable(true).build())
             }
         }
     }

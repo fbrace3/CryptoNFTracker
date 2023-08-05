@@ -42,6 +42,7 @@ class BankFinderFragment : Fragment(), OnMapReadyCallback {
     private var carMarker: Marker? = null
 //    val viewModel: SharedViewModel by activityViewModels()
     val denverLatLng = LatLng(39.7392, -104.9903)
+    private var lastSetLocation: LatLng? = null
 
 
     override fun onCreateView(
@@ -204,9 +205,11 @@ class BankFinderFragment : Fragment(), OnMapReadyCallback {
         mMap.setOnMapClickListener { latLng ->
             // Remove the existing userMarker if present
             userMarker?.remove()
+            lastSetLocation = latLng
 
             // Add a new userMarker at the clicked location
             userMarker = addMarkerAtLocation(latLng, "You")
+
 
             // Optional: Move the camera to focus on the user's location
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))

@@ -16,6 +16,7 @@
         <deepLink
             android:id="@+id/deepLink"
             app:uri="http://msudenver.edu/favoriteFragment" />
+
     </fragment>
 
     <fragment

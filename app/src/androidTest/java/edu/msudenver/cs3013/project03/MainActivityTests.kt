@@ -4,6 +4,7 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.DrawerActions
+import androidx.test.espresso.contrib.NavigationViewActions.navigateTo
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -13,36 +14,35 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class MainActivityTest {
+class MainActivityEspressoTest {
 
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun testBottomNavigationViewIsDisplayed() {
+    fun testNavigationDrawerOpens() {
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open())
+        onView(withId(R.id.nav_view)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun testNavigationFromNavDrawer() {
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open())
+        onView(withId(R.id.nav_view)).perform(navigateTo(R.id.nav_nft_fragment))
+        // Assuming you have a unique view in nav_nft_fragment to check against:
+        onView(withId(R.id.recyclerViewNft)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun testBottomNavigationIsDisplayed() {
         onView(withId(R.id.bottom_navigation_view)).check(matches(isDisplayed()))
     }
 
     @Test
-    fun testNavigationUsingDrawerMenu() {
-        // Open the drawer
-//        onView(withId(R.id.drawer_layout)).perform(click())
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open())
+    fun testNavigationFromBottomNavigation() {
+        onView(allOf(withId(R.id.nav_nft_fragment), isDisplayed())).perform(click())
 
-
-        // Click on the 'nav_coin_fragment' item in the NavigationView
-        onView(allOf(withId(R.id.nav_coin_fragment), isDescendantOfA(withId(R.id.nav_view)))).perform(click())
-
-        // Check if the appropriate fragment is displayed (use a view ID or content from that fragment)
-         onView(withId(R.id.recyclerView)).check(matches(isDisplayed()))
+        // Again, assuming you have a unique view in the nav_nft_fragment to check against:
+        onView(withId(R.id.recyclerViewNft)).check(matches(isDisplayed()))
     }
-
-//    @Test
-//    fun testNavigationUsingBottomNavigationView() {
-//        // Click on an item in the BottomNavigationView
-//        onView(allOf(withId(R.id.nav_BankFinderFragment), isDescendantOfA(withId(R.id.nav_view)))).perform(click())
-//
-//        // Check if the appropriate fragment is displayed (use a view ID or content from that fragment)
-//         onView(withId(R.id.map)).check(matches(isDisplayed()))
-//    }
 }

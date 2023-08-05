@@ -3,9 +3,12 @@ package edu.msudenver.cs3013.project03
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,8 +17,16 @@ import org.junit.runner.RunWith
 class RegisterActivityTest {
 
     @get:Rule
-    val activityRule = ActivityScenarioRule(RegisterActivity::class.java)
+    val activityRule = ActivityTestRule(RegisterActivity::class.java, true, false  )
 
+    @Before
+    fun setup() {
+        activityRule.launchActivity(null) // Launch the RegisterActivity
+    }
+    @After
+    fun tearDown() {
+        Intents.release()
+    }
     @Test
     fun testFirstNameEditTextDisplayed() {
         onView(withId(R.id.first_name))
@@ -60,6 +71,7 @@ class RegisterActivityTest {
 
     @Test
     fun testValidRegistrationInput() {
+
         onView(withId(R.id.first_name))
             .perform(typeText("John"), closeSoftKeyboard())
 
@@ -80,8 +92,9 @@ class RegisterActivityTest {
 
         onView(withId(R.id.register_button))
             .perform(click())
-        // After this, you can further assert that the LoginActivity is opened or a success toast is displayed, etc.
+
     }
+
 
     @Test
     fun testMismatchPasswordRegistration() {

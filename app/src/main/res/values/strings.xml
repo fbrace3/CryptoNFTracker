@@ -87,4 +87,5 @@
     <string name="nft_Favorites">        %s NFT Favorites        </string>
 
     <string name="photo_verify">Photo Verify</string>
+    <string name="logout">Logout</string>
 </resources>

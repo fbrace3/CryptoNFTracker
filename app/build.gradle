@@ -74,6 +74,9 @@ dependencies {
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:4.9.0'
     androidTestImplementation 'com.squareup.okhttp3:okhttp:4.9.0'
 
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
+
+
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.robolectric:robolectric:4.6.1'
 
@@ -85,5 +88,10 @@ dependencies {
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
+    testImplementation "org.robolectric:robolectric:4.7.3" // Adjust to the latest version
+    debugImplementation "androidx.fragment:fragment-testing:1.6.1" // Use the latest version
+
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
 
 }
