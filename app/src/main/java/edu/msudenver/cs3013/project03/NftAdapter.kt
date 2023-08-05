@@ -11,7 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 
 class NftAdapter(
-    private var nftData: MutableList<NftItem>,
+    var nftData: MutableList<NftItem>,
     private val onAddButtonClickListener: (NftItem) -> Unit,
     private val showAddButton: Boolean = true,
 //    private val onNftImageClickListener: (String) -> Unit // Add this callback for NFT image clicks

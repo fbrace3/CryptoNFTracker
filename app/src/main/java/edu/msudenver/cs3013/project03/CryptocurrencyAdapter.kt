@@ -7,11 +7,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class CryptocurrencyAdapter(
-    private val cryptocurrencies: MutableList<Cryptocurrency>,
+    var cryptocurrencies: MutableList<Cryptocurrency>,
     private val onAddButtonClickListener: (Cryptocurrency) -> Unit,
     private val showAddButton: Boolean = true
 ) : RecyclerView.Adapter<CryptocurrencyAdapter.CryptocurrencyViewHolder>() {
-
     class CryptocurrencyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textName: TextView = itemView.findViewById(R.id.textName)
         val textSymbol: TextView = itemView.findViewById(R.id.textSymbol)

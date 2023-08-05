@@ -1,5 +1,4 @@
 package edu.msudenver.cs3013.project03
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -45,11 +45,11 @@ class FavoriteFragment : Fragment() {
             val email = user.emailAddress
             // Update UI elements with user data, e.g., textView.text = "Username: $username"
         }
+
         val CryptoHeader = getString(R.string.crypto_Favorites, user?.username)
         val NFTHeader = getString(R.string.nft_Favorites, user?.username)
         headerFavorite = view.findViewById(R.id.headerFavorite)
         headerNftFavorite = view.findViewById(R.id.headerFavoriteNft)
-
 
         headerFavorite.text = CryptoHeader
         headerNftFavorite.text = NFTHeader
@@ -61,25 +61,40 @@ class FavoriteFragment : Fragment() {
         recyclerViewNft.layoutManager = LinearLayoutManager(requireContext())
 
         // Initialize the CryptocurrencyAdapter
-        // Note: We're passing `false` for `showAddButton` argument to hide the "Add" button.
-        val adapter = CryptocurrencyAdapter(favoritesViewModel.favoritesList.toMutableList(), {}, false)
+        val adapter = CryptocurrencyAdapter(favoritesViewModel.favoritesList.value ?: mutableListOf(), {}, false)
         recyclerView.adapter = adapter
 
-        val adapterNft = NftAdapter(favoritesViewModel.nftfavoritesList.toMutableList(), {}, false)
-        recyclerViewNft.adapter = adapterNft
+        // Observe changes to the LiveData and update the adapter
+        favoritesViewModel.favoritesList.observe(viewLifecycleOwner, Observer { favoritesList ->
+            adapter.cryptocurrencies = favoritesList
+            adapter.notifyDataSetChanged()
+        })
 
         // Attach the SwipeToDeleteCallback
-        val cryptoSwipeHandler = SwipeToDeleteCallback(adapter)
+        val cryptoSwipeHandler = SwipeToDeleteCallback(adapter, favoritesViewModel)
         val cryptoItemTouchHelper = ItemTouchHelper(cryptoSwipeHandler)
         cryptoItemTouchHelper.attachToRecyclerView(recyclerView)
 
-        val nftSwipeHandler = SwipeToDeleteCallback(adapterNft)
+        // Initialize the NftAdapter
+        val adapterNft = NftAdapter(favoritesViewModel.nftFavoritesList.value ?: mutableListOf(), {}, false)
+        recyclerViewNft.adapter = adapterNft
+
+        // Observe changes to the LiveData and update the adapter
+        favoritesViewModel.nftFavoritesList.observe(viewLifecycleOwner, Observer { nftFavoritesList ->
+            adapterNft.nftData = nftFavoritesList
+            adapterNft.notifyDataSetChanged()
+        })
+
+        // Attach the SwipeToDeleteCallback
+        val nftSwipeHandler = SwipeToDeleteCallback(adapterNft, favoritesViewModel)
         val nftItemTouchHelper = ItemTouchHelper(nftSwipeHandler)
         nftItemTouchHelper.attachToRecyclerView(recyclerViewNft)
     }
 
-    private class SwipeToDeleteCallback(private val adapter: RecyclerView.Adapter<*>) :
-        ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+    private class SwipeToDeleteCallback(
+        private val adapter: RecyclerView.Adapter<*>,
+        private val favoritesViewModel: FavoritesViewModel
+    ) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
         override fun onMove(
             recyclerView: RecyclerView,
@@ -93,12 +108,12 @@ class FavoriteFragment : Fragment() {
             val position = viewHolder.adapterPosition
             when (adapter) {
                 is CryptocurrencyAdapter -> {
-                    val item = (adapter as CryptocurrencyAdapter).getItemAtPosition(position)
-                    (adapter as CryptocurrencyAdapter).removeItem(item)
+                    val item = adapter.getItemAtPosition(position)
+                    favoritesViewModel.removeFromFavorites(item)
                 }
                 is NftAdapter -> {
-                    val item = (adapter as NftAdapter).getItemAtPosition(position)
-                    (adapter as NftAdapter).removeItem(item)
+                    val item = adapter.getItemAtPosition(position)
+                    favoritesViewModel.removeFromNftFavorites(item)
                 }
             }
         }
